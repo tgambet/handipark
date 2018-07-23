@@ -2,20 +2,33 @@
      leaflet
      [leafletOptions]="options"
      [(leafletZoom)]="zoom"
-     [(leafletCenter)]="center"
+     [leafletCenter]="center"
      [leafletBaseLayers]="baseLayers"
      [leafletLayersControlOptions]="layersControlOptions"
-     [leafletMarkerCluster]="markerClusterData">
+     [leafletMarkerCluster]="markerClusterData"
+     [leafletMarkerClusterOptions]="markerClusterOptions">
 
-  <div id="zoom-in" class="control" (click)="zoomIn()" [class.disabled]="zoom >= zoomMax">
-    <span>+</span>
+  <div class="controls">
+    <div id="zoom-in" class="control" (click)="zoomIn()" [class.disabled]="zoom >= zoomMax">
+      <span>+</span>
+    </div>
+    <div id="zoom-out" class="control" (click)="zoomOut()" [class.disabled]="zoom <= zoomMin">
+      <span>-</span>
+    </div>
+    <div id="info" class="control">
+      <mat-icon>info</mat-icon>
+    </div>
+    <div id="full-screen" class="control">
+      <mat-icon>fullscreen</mat-icon>
+    </div>
+    <div id="layers" class="control">
+      <mat-icon>layers</mat-icon>
+    </div>
+    <div id="gps" class="control">
+      <mat-icon>gps_not_fixed</mat-icon>
+    </div>
   </div>
-  <div id="zoom-out" class="control" (click)="zoomOut()" [class.disabled]="zoom <= zoomMin">
-    <span>-</span>
-  </div>
-  <div id="gps" class="control">
-    <mat-icon>gps_not_fixed</mat-icon>
-  </div>
+
 
 </div>
 

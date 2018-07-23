@@ -33,6 +33,13 @@ export class AppComponent implements OnInit {
 
   markerClusterData: any[] = [];
 
+  markerClusterOptions: L.MarkerClusterGroupOptions = {
+    animate: true,
+    disableClusteringAtZoom: 16,
+    maxClusterRadius: 80,
+    spiderfyOnMaxZoom: false
+  };
+
   ngOnInit(): void {
 
     const tmp = [];
