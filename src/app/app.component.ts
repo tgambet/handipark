@@ -7136,8 +7136,14 @@ export class AppComponent {
           })
         });
       }
+    }).bindPopup(function (layer) {
+      const places = layer['feature'].properties.NB_PLACE;
+      const voie = layer['feature'].properties.NOM_VOIE;
+      const compl = layer['feature'].properties.COMPLEMENT;
+      return `<span>Nombre de places : <b>${places}</b></span>`
+        + `<br><span>Nom de voie : <b>${voie}</b></span>`
+        + (compl ? `<br><span>Complément : <b>${compl}</b></span>` : '');
     }).addTo(map);
   }
-
 
 }
