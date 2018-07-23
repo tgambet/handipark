@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 
 import {AppComponent} from './app.component';
+import {LeafletMarkerClusterModule} from '@asymmetrik/ngx-leaflet-markercluster';
 
 @NgModule({
   declarations: [
@@ -10,7 +11,8 @@ import {AppComponent} from './app.component';
   ],
   imports: [
     BrowserModule,
-    LeafletModule.forRoot()
+    LeafletModule.forRoot(),
+    LeafletMarkerClusterModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
