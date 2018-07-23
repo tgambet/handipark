@@ -1,3 +1,52 @@
 #map {
   height: 100vh;
 }
+
+.control {
+  color: white;
+  background-color: #4798D0;
+  border: 1px solid rgba(0,0,0,0.3);
+  border-radius: 15%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: bolder;
+  position: absolute;
+  z-index: 1000;
+  left: 0.5rem;
+  height: 2rem;
+  width: 2rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.control span {
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  font-size: 30px;
+  line-height: 1;
+  text-align: center;
+}
+
+.control.disabled {
+  background-color: #AEC2D1;
+}
+
+#zoom-in {
+  top: 0.5rem;
+}
+
+#zoom-out {
+  top: 3rem;
+}
+
+#zoom-out span {
+  position: relative;
+  top: -2px;
+}
+
+#gps {
+  top: 5.5rem;
+}

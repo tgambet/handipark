@@ -11,30 +11,27 @@ import {appData} from './app.data';
 })
 export class AppComponent implements OnInit {
 
-  LAYER_OSM = {
-    id: 'openstreetmap',
-    name: 'Open Street Map',
-    enabled: false,
-    layer: L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    })
-  };
+  zoom = 13;
+  zoomMax = 19;
+  zoomMin = 12;
+  center = L.latLng(43.706595, 7.250885);
 
   layersControlOptions = { position: 'bottomleft' };
 
   baseLayers = {
-    'Open Street Map': this.LAYER_OSM.layer
+    'Open Street Map': L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: this.zoomMax,
+      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    })
   };
 
   options = {
-    zoom: 13,
-    center: L.latLng(43.7035944, 7.2495124)
+    zoomControl: false,
+    minZoom: this.zoomMin,
+    maxZoom: this.zoomMax
   };
 
   markerClusterData: any[] = [];
-  markerClusterGroup: L.MarkerClusterGroup;
-  markerClusterOptions: L.MarkerClusterGroupOptions;
 
   ngOnInit(): void {
 
@@ -47,11 +44,11 @@ export class AppComponent implements OnInit {
       shadowUrl: 'assets/marker-shadow.png'
     });
 
-    appData.features.forEach(object => {
+    appData.forEach(object => {
 
-      const places = object.properties.NB_PLACE;
-      const voie = object.properties.NOM_VOIE;
-      const compl = object.properties.COMPLEMENT;
+      const places = object.NB_PLACE;
+      const voie = object.NOM_VOIE;
+      const compl = object.COMPLEMENT;
 
       const popup = `<span>Nombre de places : <b>${places}</b></span>`
         + `<br><span>Nom de voie : <b>${voie}</b></span>`
@@ -68,10 +65,12 @@ export class AppComponent implements OnInit {
 
   }
 
-  markerClusterReady(group: L.MarkerClusterGroup) {
+  zoomIn(): void {
+    this.zoom = this.zoom >= this.zoomMax ? this.zoomMax : this.zoom + 1;
+  }
 
-    this.markerClusterGroup = group;
-
+  zoomOut(): void {
+    this.zoom = this.zoom <= this.zoomMin ? this.zoomMin : this.zoom - 1;
   }
 
 }
