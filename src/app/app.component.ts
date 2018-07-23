@@ -16,14 +16,24 @@ export class AppComponent implements OnInit {
   zoomMin = 12;
   center = L.latLng(43.706595, 7.250885);
 
-  layersControlOptions = { position: 'bottomleft' };
+  layer_OpenStreetMap = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: this.zoomMax,
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  });
 
-  baseLayers = {
-    'Open Street Map': L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: this.zoomMax,
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    })
-  };
+  layer_ArcGISStreets = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}/', {
+    maxZoom: this.zoomMax,
+    attribution: '© ArcGIS'
+  });
+
+  layer_ArcGISSatellite = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}/', {
+    maxZoom: this.zoomMax,
+    attribution: '© ArcGIS'
+  });
+
+  currentLayer = this.layer_OpenStreetMap;
+
+  layers: L.Layer[] = [this.currentLayer];
 
   options = {
     zoomControl: false,
@@ -78,6 +88,24 @@ export class AppComponent implements OnInit {
 
   zoomOut(): void {
     this.zoom = this.zoom <= this.zoomMin ? this.zoomMin : this.zoom - 1;
+  }
+
+  nextLayer(): void {
+    switch (this.currentLayer) {
+      case this.layer_OpenStreetMap: {
+        this.currentLayer = this.layer_ArcGISSatellite;
+        break;
+      }
+      case this.layer_ArcGISSatellite: {
+        this.currentLayer = this.layer_ArcGISStreets;
+        break;
+      }
+      case this.layer_ArcGISStreets: {
+        this.currentLayer = this.layer_OpenStreetMap;
+        break;
+      }
+    }
+    this.layers = [this.currentLayer];
   }
 
 }

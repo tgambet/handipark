@@ -3,8 +3,7 @@
      [leafletOptions]="options"
      [(leafletZoom)]="zoom"
      [leafletCenter]="center"
-     [leafletBaseLayers]="baseLayers"
-     [leafletLayersControlOptions]="layersControlOptions"
+     [leafletLayers]="layers"
      [leafletMarkerCluster]="markerClusterData"
      [leafletMarkerClusterOptions]="markerClusterOptions">
 
@@ -21,7 +20,7 @@
     <div id="full-screen" class="control">
       <mat-icon>fullscreen</mat-icon>
     </div>
-    <div id="layers" class="control">
+    <div id="layers" class="control" (click)="nextLayer()">
       <mat-icon>layers</mat-icon>
     </div>
     <div id="gps" class="control">
