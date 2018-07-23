@@ -11,6 +11,8 @@ import {appData} from './app.data';
 })
 export class AppComponent implements OnInit {
 
+  fullscreen = false;
+
   zoom = 13;
   zoomMax = 19;
   zoomMin = 12;

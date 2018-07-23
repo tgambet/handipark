@@ -1,35 +1,43 @@
-<div id="map"
-     leaflet
-     [leafletOptions]="options"
-     [(leafletZoom)]="zoom"
-     [leafletCenter]="center"
-     [leafletLayers]="layers"
-     [leafletMarkerCluster]="markerClusterData"
-     [leafletMarkerClusterOptions]="markerClusterOptions">
+<div id="container" class="mat-typography">
 
-  <div class="controls">
-    <div id="zoom-in" class="control" (click)="zoomIn()" [class.disabled]="zoom >= zoomMax">
-      <span>+</span>
+  <header>
+    <h1>HandiPark - Nice</h1>
+  </header>
+
+  <div id="map"
+       leaflet
+       [leafletOptions]="options"
+       [(leafletZoom)]="zoom"
+       [leafletCenter]="center"
+       [leafletLayers]="layers"
+       [leafletMarkerCluster]="markerClusterData"
+       [leafletMarkerClusterOptions]="markerClusterOptions"
+       [class.fullscreen]="fullscreen">
+
+    <div class="controls">
+      <div id="zoom-in" class="control" (click)="zoomIn()" [class.disabled]="zoom >= zoomMax">
+        <span>+</span>
+      </div>
+      <div id="zoom-out" class="control" (click)="zoomOut()" [class.disabled]="zoom <= zoomMin">
+        <span>-</span>
+      </div>
+      <div id="info" class="control">
+        <mat-icon>info</mat-icon>
+      </div>
+      <div id="full-screen" class="control" (click)="fullscreen = !fullscreen">
+        <mat-icon *ngIf="fullscreen">fullscreen_exit</mat-icon>
+        <mat-icon *ngIf="!fullscreen">fullscreen</mat-icon>
+      </div>
+      <div id="layers" class="control" (click)="nextLayer()">
+        <mat-icon>layers</mat-icon>
+      </div>
+      <div id="gps" class="control">
+        <mat-icon>gps_not_fixed</mat-icon>
+      </div>
     </div>
-    <div id="zoom-out" class="control" (click)="zoomOut()" [class.disabled]="zoom <= zoomMin">
-      <span>-</span>
-    </div>
-    <div id="info" class="control">
-      <mat-icon>info</mat-icon>
-    </div>
-    <div id="full-screen" class="control">
-      <mat-icon>fullscreen</mat-icon>
-    </div>
-    <div id="layers" class="control" (click)="nextLayer()">
-      <mat-icon>layers</mat-icon>
-    </div>
-    <div id="gps" class="control">
-      <mat-icon>gps_not_fixed</mat-icon>
-    </div>
+
   </div>
 
+  <footer>© 2018 Thomas Gambet • <a href="mailto:creasource.net@gmail.com">creasource.net@gmail.com</a></footer>
 
 </div>
-
-
-

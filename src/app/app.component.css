@@ -1,5 +1,47 @@
+#container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  padding: 0.5rem;
+  background-color: #4798D0;
+  color: white;
+  text-shadow: 0 0 4px black;
+  border-bottom: 1px solid rgba(0,0,0,0.3);
+}
+
+header h1 {
+  margin: 0;
+}
+
 #map {
-  height: 100vh;
+  flex-grow: 1;
+}
+
+#map.fullscreen {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+footer {
+  padding: 0.5rem;
+  background-color: #4798D0;
+  color: white;
+  text-shadow: 0 0 4px black;
+  border-top: 1px solid rgba(0,0,0,0.3);
+}
+
+footer a {
+  color: white;
 }
 
 .controls {
