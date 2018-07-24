@@ -23,6 +23,14 @@ header h1 {
   margin: 0 0 0 0.5rem;
 }
 
+header .filler {
+  flex-grow: 1;
+}
+
+header .github {
+  line-height: 0;
+}
+
 #map {
   flex-grow: 1;
 }
