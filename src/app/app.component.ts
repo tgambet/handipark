@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
 
   markerClusterOptions: L.MarkerClusterGroupOptions = {
     animate: true,
-    disableClusteringAtZoom: 16,
+    disableClusteringAtZoom: 15,
     maxClusterRadius: 80,
     spiderfyOnMaxZoom: false
   };
