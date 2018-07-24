@@ -27,7 +27,7 @@
       <div id="zoom-out" class="control" (click)="zoomOut()" [class.disabled]="zoom <= zoomMin">
         <span>-</span>
       </div>
-      <div id="info" class="control">
+      <div id="info" class="control" (click)="popupInfo()">
         <mat-icon>info</mat-icon>
       </div>
       <div id="full-screen" class="control" (click)="fullscreen = !fullscreen">

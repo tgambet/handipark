@@ -3,6 +3,8 @@ import * as L from 'leaflet';
 import 'leaflet.markercluster';
 
 import {appData} from './app.data';
+import {MatDialog} from '@angular/material';
+import {InfoComponent} from './info.component';
 
 @Component({
   selector: 'app-root',
@@ -51,6 +53,8 @@ export class AppComponent implements OnInit {
     maxClusterRadius: 80,
     spiderfyOnMaxZoom: false
   };
+
+  constructor(private dialog: MatDialog) {}
 
   ngOnInit(): void {
 
@@ -108,6 +112,15 @@ export class AppComponent implements OnInit {
       }
     }
     this.layers = [this.currentLayer];
+  }
+
+  popupInfo() {
+    this.dialog.open(InfoComponent, {
+      data: {
+        aires: appData.length,
+        total: appData.reduce((p, c) => p + c.NB_PLACE, 0)
+      }
+    });
   }
 
 }
