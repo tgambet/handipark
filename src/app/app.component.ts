@@ -56,7 +56,7 @@ export class AppComponent implements OnInit {
 
   geoWatchId: number;
 
-  userPosition: { latitude: number, longitude: number };
+  userPosition: { latitude: number, longitude: number, accuracy: number };
 
   constructor(private dialog: MatDialog) {}
 
@@ -82,7 +82,7 @@ export class AppComponent implements OnInit {
         + (compl ? `<br><span>Complément : <b>${compl}</b></span>` : '');
 
       tmp.push(
-        L.marker([object.geometry.coordinates[1], object.geometry.coordinates[0]], {icon})
+        L.marker([object.geometry.coordinates[1], object.geometry.coordinates[0]], {icon: icon})
           .bindPopup(popup)
       );
 
@@ -115,7 +115,7 @@ export class AppComponent implements OnInit {
         break;
       }
     }
-    this.layers = [this.currentLayer];
+    this._updateLayers();
   }
 
   popupInfo() {
@@ -143,6 +143,7 @@ export class AppComponent implements OnInit {
         navigator.geolocation.clearWatch(this.geoWatchId);
         this.geoWatchId = null;
         this.userPosition = null;
+        this._updateLayers();
       } else {
         this.geoWatchId = navigator.geolocation.watchPosition(
           (position) => {
@@ -152,8 +153,10 @@ export class AppComponent implements OnInit {
             }
             this.userPosition = {
               latitude: position.coords.latitude,
-              longitude: position.coords.longitude
+              longitude: position.coords.longitude,
+              accuracy: position.coords.accuracy
             };
+            this._updateLayers();
           },
           (error) => {
             // this.error = error.message
@@ -162,13 +165,24 @@ export class AppComponent implements OnInit {
           },
           {
             enableHighAccuracy: true,
-            maximumAge        : 0,
-            timeout           : 30000
+            maximumAge: 120000,
+            timeout: 30000
           }
         );
       }
     } else {
       // this.error = "Geolocalisation non disponible"
+    }
+  }
+
+  _updateLayers() {
+    if (this.userPosition) {
+      this.layers = [
+        this.currentLayer,
+        L.circle(L.latLng(this.userPosition.latitude, this.userPosition.longitude), {radius: this.userPosition.accuracy / 2, color: 'red'})
+      ];
+    } else {
+      this.layers = [this.currentLayer];
     }
   }
 
