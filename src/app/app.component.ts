@@ -20,17 +20,17 @@ export class AppComponent implements OnInit {
   zoomMin = 12;
   center = L.latLng(43.706595, 7.250885);
 
-  layer_OpenStreetMap = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  layer_OpenStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: this.zoomMax,
     attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   });
 
-  layer_ArcGISStreets = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}/', {
+  layer_ArcGISStreets = L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}/', {
     maxZoom: this.zoomMax,
     attribution: '© ArcGIS'
   });
 
-  layer_ArcGISSatellite = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}/', {
+  layer_ArcGISSatellite = L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}/', {
     maxZoom: this.zoomMax,
     attribution: '© ArcGIS'
   });
