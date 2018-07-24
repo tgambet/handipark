@@ -37,8 +37,9 @@
       <div id="layers" class="control" (click)="nextLayer()">
         <mat-icon>layers</mat-icon>
       </div>
-      <div id="gps" class="control">
-        <mat-icon>gps_not_fixed</mat-icon>
+      <div id="gps" class="control" (click)="toggleGeoLocation()" [class.disabled]="isGeoLocalizing()">
+        <mat-icon *ngIf="!isGeoLocalized()">gps_not_fixed</mat-icon>
+        <mat-icon *ngIf="isGeoLocalized()">gps_fixed</mat-icon>
       </div>
     </div>
 

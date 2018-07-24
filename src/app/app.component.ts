@@ -54,6 +54,10 @@ export class AppComponent implements OnInit {
     spiderfyOnMaxZoom: false
   };
 
+  geoWatchId: number;
+
+  userPosition: { latitude: number, longitude: number };
+
   constructor(private dialog: MatDialog) {}
 
   ngOnInit(): void {
@@ -121,6 +125,51 @@ export class AppComponent implements OnInit {
         total: appData.reduce((p, c) => p + c.NB_PLACE, 0)
       }
     });
+  }
+
+  isGeoLocalized() {
+    return this.geoWatchId && this.userPosition;
+  }
+
+  isGeoLocalizing() {
+    return this.geoWatchId && !this.userPosition;
+  }
+
+  toggleGeoLocation() {
+    if ('geolocation' in navigator) {
+      if (this.isGeoLocalizing()) {
+        return;
+      } else if (this.isGeoLocalized()) {
+        navigator.geolocation.clearWatch(this.geoWatchId);
+        this.geoWatchId = null;
+        this.userPosition = null;
+      } else {
+        this.geoWatchId = navigator.geolocation.watchPosition(
+          (position) => {
+            // The first time center map on user position
+            if (!this.userPosition) {
+              this.center = L.latLng(position.coords.latitude, position.coords.longitude);
+            }
+            this.userPosition = {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude
+            };
+          },
+          (error) => {
+            // this.error = error.message
+            navigator.geolocation.clearWatch(this.geoWatchId);
+            this.geoWatchId = null;
+          },
+          {
+            enableHighAccuracy: true,
+            maximumAge        : 0,
+            timeout           : 30000
+          }
+        );
+      }
+    } else {
+      // this.error = "Geolocalisation non disponible"
+    }
   }
 
 }
