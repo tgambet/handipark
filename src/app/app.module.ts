@@ -7,6 +7,8 @@ import {LeafletMarkerClusterModule} from '@asymmetrik/ngx-leaflet-markercluster'
 import {MatButtonModule, MatDialogModule, MatIconModule} from '@angular/material';
 import {InfoComponent} from './info.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ServiceWorkerModule} from '@angular/service-worker';
+import {environment} from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     LeafletMarkerClusterModule.forRoot(),
     MatIconModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]
