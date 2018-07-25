@@ -1,8 +1,8 @@
 {
   "name": "Handipark",
   "short_name": "Handipark",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "theme_color": "#1B76C8",
+  "background_color": "#1B76C8",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
