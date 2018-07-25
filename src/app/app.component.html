@@ -9,7 +9,8 @@
     </svg>
     <h1>Handipark - Nice</h1>
     <div class="filler"></div>
-    <a class="github" href="https://github.com/tgambet/handipark"><img src="assets/github.png" height="32"/></a>
+    <button mat-button class="install" (click)="install()" *ngIf="installPromptEvent">Installer</button>
+    <a class="github" href="https://github.com/tgambet/handipark" *ngIf="!installPromptEvent"><img src="assets/github.png" height="32"/></a>
   </header>
 
   <div id="map"

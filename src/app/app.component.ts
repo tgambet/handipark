@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
 
@@ -60,6 +60,8 @@ export class AppComponent implements OnInit {
 
   userPosition: { latitude: number, longitude: number, accuracy: number };
 
+  installPromptEvent: any;
+
   constructor(private dialog: MatDialog) {}
 
   ngOnInit(): void {
@@ -96,6 +98,27 @@ export class AppComponent implements OnInit {
 
   onMapReady(map: L.Map) {
     this.map = map;
+  }
+
+  @HostListener('window:beforeinstallprompt', ['$event'])
+  beforeinstallprompt(event: Event) {
+    this.installPromptEvent = event;
+    event.preventDefault();
+  }
+
+  install() {
+    if (this.installPromptEvent) {
+      this.installPromptEvent.prompt();
+      this.installPromptEvent.userChoice
+        .then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('User accepted the A2HS prompt');
+          } else {
+            console.log('User dismissed the A2HS prompt');
+          }
+          this.installPromptEvent = null;
+        });
+    }
   }
 
   zoomIn(): void {
@@ -171,7 +194,7 @@ export class AppComponent implements OnInit {
             };
             this._updateLayers();
           },
-          (error) => {
+          () => {
             // this.error = error.message
             navigator.geolocation.clearWatch(this.geoWatchId);
             this.geoWatchId = null;
