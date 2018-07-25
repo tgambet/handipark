@@ -5,6 +5,13 @@
 
 @include mat-core();
 
+$light-theme: mat-light-theme(
+    mat-palette($mat-blue, 600, 100, 900),
+    mat-palette($mat-orange)
+);
+
+@include angular-material-theme($light-theme);
+
 body {
   margin: 0;
   padding: 0;

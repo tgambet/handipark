@@ -9,7 +9,7 @@
     </svg>
     <h1>Handipark - Nice</h1>
     <div class="filler"></div>
-    <a class="github" href="https://github.com/tgambet/handipark"><img src="assets/github.png" /></a>
+    <a class="github" href="https://github.com/tgambet/handipark"><img src="assets/github.png" height="32"/></a>
   </header>
 
   <div id="map"
@@ -23,23 +23,23 @@
        [class.fullscreen]="fullscreen">
 
     <div class="controls">
-      <div id="zoom-in" class="control" (click)="zoomIn()" [class.disabled]="zoom >= zoomMax">
+      <div id="zoom-in" class="control" (click)="zoomIn()" [class.disabled]="zoom >= zoomMax" matTooltip="Zoom avant">
         <span>+</span>
       </div>
-      <div id="zoom-out" class="control" (click)="zoomOut()" [class.disabled]="zoom <= zoomMin">
+      <div id="zoom-out" class="control" (click)="zoomOut()" [class.disabled]="zoom <= zoomMin" matTooltip="Zoom arrière">
         <span>-</span>
       </div>
-      <div id="info" class="control" (click)="popupInfo()">
+      <div id="info" class="control" (click)="popupInfo()" matTooltip="Informations">
         <mat-icon>info</mat-icon>
       </div>
-      <div id="full-screen" class="control" (click)="fullscreen = !fullscreen">
+      <div id="full-screen" class="control" (click)="fullscreen = !fullscreen" matTooltip="Plein écran">
         <mat-icon *ngIf="fullscreen">fullscreen_exit</mat-icon>
         <mat-icon *ngIf="!fullscreen">fullscreen</mat-icon>
       </div>
-      <div id="layers" class="control" (click)="nextLayer()">
+      <div id="layers" class="control" (click)="nextLayer()" matTooltip="Cartes">
         <mat-icon>layers</mat-icon>
       </div>
-      <div id="gps" class="control" (click)="toggleGeoLocation()" [class.disabled]="isGeoLocalizing()">
+      <div id="gps" class="control" (click)="toggleGeoLocation()" [class.disabled]="isGeoLocalizing()" matTooltip="Géolocalisation">
         <mat-icon *ngIf="!isGeoLocalized()">gps_not_fixed</mat-icon>
         <mat-icon *ngIf="isGeoLocalized()">gps_fixed</mat-icon>
       </div>
