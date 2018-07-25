@@ -15,6 +15,8 @@ export class AppComponent implements OnInit {
 
   fullscreen = false;
 
+  map: L.Map;
+
   zoom = 13;
   zoomMax = 19;
   zoomMin = 12;
@@ -92,12 +94,23 @@ export class AppComponent implements OnInit {
 
   }
 
+  onMapReady(map: L.Map) {
+    this.map = map;
+  }
+
   zoomIn(): void {
     this.zoom = this.zoom >= this.zoomMax ? this.zoomMax : this.zoom + 1;
   }
 
   zoomOut(): void {
     this.zoom = this.zoom <= this.zoomMin ? this.zoomMin : this.zoom - 1;
+  }
+
+  toggleFullScreen(): void {
+    this.fullscreen = !this.fullscreen;
+    if (this.map) {
+      setTimeout(() => this.map.invalidateSize());
+    }
   }
 
   nextLayer(): void {

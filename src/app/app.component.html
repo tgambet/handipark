@@ -20,6 +20,7 @@
        [leafletLayers]="layers"
        [leafletMarkerCluster]="markerClusterData"
        [leafletMarkerClusterOptions]="markerClusterOptions"
+       (leafletMapReady)="onMapReady($event)"
        [class.fullscreen]="fullscreen">
 
     <div class="controls">
@@ -32,7 +33,7 @@
       <div id="info" class="control" (click)="popupInfo()" matTooltip="Informations">
         <mat-icon>info</mat-icon>
       </div>
-      <div id="full-screen" class="control" (click)="fullscreen = !fullscreen" matTooltip="Plein écran">
+      <div id="full-screen" class="control" (click)="toggleFullScreen()" matTooltip="Plein écran">
         <mat-icon *ngIf="fullscreen">fullscreen_exit</mat-icon>
         <mat-icon *ngIf="!fullscreen">fullscreen</mat-icon>
       </div>
